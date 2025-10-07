@@ -93,11 +93,11 @@ export default function Home() {
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-3">
             <div className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">P</span>
+              <span className="text-white font-bold text-lg">A</span>
             </div>
             <div>
-              <span className="text-xl font-bold text-gray-800">PayTopUp</span>
-              <span className="text-xs text-blue-500 font-medium block">Jasa Top Up PayPal</span>
+              <span className="text-xl font-bold text-gray-800">Avaller</span>
+              <span className="text-xs text-blue-500 font-medium block">Jasa Convert PayPal</span>
             </div>
           </div>
 
