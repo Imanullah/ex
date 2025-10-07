@@ -191,7 +191,7 @@ export default function Home() {
                     <span className="text-gray-700">Jumlah yang dibayar:</span>
                     <span className="text-xl font-bold text-blue-600">Rp {calculateResult()}</span>
                   </div>
-                  <div className="text-sm text-gray-600">Rate: 1 USD = Rp 15,500</div>
+                  <div className="text-sm text-gray-600">Rate: 1 USD = Rp 16,500</div>
                 </div>
 
                 <button className="w-full bg-green-500 text-white py-3 rounded-lg font-bold hover:bg-green-600 transition duration-200 flex items-center justify-center space-x-2">
