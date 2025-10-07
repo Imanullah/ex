@@ -1,11 +1,16 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { motion, useAnimate } from 'motion/react';
 
 export default function SectionHero() {
   const [activeTab, setActiveTab] = useState<'beli' | 'jual'>('beli');
   const [amount, setAmount] = useState('');
   const [paypalEmail, setPaypalEmail] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('transfer');
+
+  const [scope, animate] = useAnimate();
 
   // Rate sudah include semua biaya - lebih transparan untuk customer
   const rates = {
@@ -47,18 +52,23 @@ export default function SectionHero() {
 
   const { total, rate } = calculateResult();
 
+  useEffect(() => {
+    
+  });
+
   return (
     <section className="py-16">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
-            <h1 className="text-4xl md:text-5xl lg:text-5xl font-bold text-gray-800 mb-6">
+            <motion.h1 initial={{ transform: 'translateY(100px)' }} animate={{ transform: 'translateY(0px)' }} transition={{ type: 'spring' }} className="text-4xl md:text-5xl lg:text-5xl font-bold text-gray-800 mb-6">
               Jasa Top Up <span className="text-blue-500">PayPal</span> Cepat & Aman
-            </h1>
-            <p className="text-xl text-gray-600 mb-8">
-              Platform terpercaya untuk convert saldo PayPal ke Rupiah dan sebaliknya.
+            </motion.h1>
+            <motion.h2 className="text-medium text-gray-600 mb-8">
+              Platform terpercaya untuk convert saldo PayPal dengan rate murah ke Rupiah dan sebaliknya. Dapatkan kurs Dolar USD PayPal terbaik yang terupdate 24 jam
               <span className="font-semibold text-green-600"> Bebas biaya penanganan & tanpa biaya admin!</span>
-            </p>
+            </motion.h2>
+
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href="#calculator" className="bg-blue-500 text-white px-6 py-3 rounded-lg font-bold hover:bg-blue-600 transition duration-200 text-center">
                 Hitung Sekarang
