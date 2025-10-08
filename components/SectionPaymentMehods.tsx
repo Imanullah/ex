@@ -57,7 +57,7 @@ export default function SectionPaymentMethods() {
   };
 
   return (
-    <section id="payment-methods" className="py-16 bg-gradient-to-br from-slate-50 to-blue-50/30 overflow-hidden">
+    <section id="payment-methods" className="py-10 bg-gradient-to-br from-slate-50 to-blue-50/30 overflow-hidden">
       <div className="container mx-auto px-4">
         {/* Header */}
         <motion.div className="text-center mb-3" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true, margin: '-100px' }}>
