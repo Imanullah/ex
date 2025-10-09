@@ -81,7 +81,7 @@ export default function SectionPaymentMethods() {
 
                     {/* Logo Container */}
                     <motion.div className="relative w-full" whileHover={{ scale: 1.1, transition: { duration: 0.3 } }}>
-                      <Image src={`/${bank.logo}`} width={180} height={100} alt={bank.name} className="object-contain transition-all duration-300 group-hover:brightness-110" />
+                      <Image src={`/${bank.logo}`} width={180} height={100} alt={bank.name} className="object-contain transition-all duration-300 group-hover:brightness-110 w-[180px] h-[100px]" priority />
                     </motion.div>
 
                     {/* Hover Border Effect */}
