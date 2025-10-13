@@ -3,7 +3,9 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, useAnimate } from 'motion/react';
+
 import FormCalculator from '@/components/FormCalculator';
+import FormTest from '@/components/FormTest';
 
 export default function SectionHero() {
   const [scope, animate] = useAnimate();
@@ -111,6 +113,7 @@ export default function SectionHero() {
 
           {/* Calculator Section */}
           <FormCalculator />
+          {/* <FormTest/> */}
         </div>
       </div>
     </section>

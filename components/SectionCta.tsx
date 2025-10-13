@@ -11,7 +11,7 @@ export default function SectionCta() {
           <Link href="#calculator" className="bg-white text-blue-500 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition duration-200">
             Mulai Sekarang
           </Link>
-          <a href="https://wa.me/62812345678" target="_blank" rel="noopener noreferrer" className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white hover:text-blue-500 transition duration-200">
+          <a href="https://wa.me/6285121312337" target="_blank" rel="noopener noreferrer" className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white hover:text-blue-500 transition duration-200">
             Chat WhatsApp
           </a>
         </div>
@@ -19,3 +19,5 @@ export default function SectionCta() {
     </section>
   );
 }
+
+

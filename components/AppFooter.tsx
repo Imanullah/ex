@@ -79,8 +79,8 @@ export default function AppFooter() {
             <ul className="space-y-2 text-gray-400">
               <li className="flex items-center space-x-2">
                 <span>📱</span>
-                <a href="https://wa.me/62812345678" className="hover:text-white transition duration-200">
-                  +62 812345678
+                <a href="https://wa.me/6285121312337" className="hover:text-white transition duration-200">
+                  +62 851-2131-2337
                 </a>
               </li>
               <li className="flex items-center space-x-2">
