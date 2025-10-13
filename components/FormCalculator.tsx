@@ -153,7 +153,29 @@ export default function FormCalculator() {
             </div>
             {/* <input type="hidden" {...register('paymentMethod')} /> */}
           </div>
-          <button type="submit">Beli</button>
+
+          {/* Result yang sederhana tanpa breakdown biaya */}
+          <div className={clsx('rounded-lg p-4 border', { 'bg-blue-100 border-blue-500': activeTab === 'buy', 'bg-green-50 border-green-200': activeTab === 'sell' })}>
+            <div className="flex justify-between items-center">
+              <span className="text-gray-700 font-medium">{activeTab === 'buy' ? 'Rupiah yang dibayar:' : 'Rupiah yang diterima:'}</span>
+              <span className="text-2xl font-bold text-green-600">{activeTab === 'buy' ? `Rp ${total.toLocaleString('id-ID')}` : `Rp ${total.toLocaleString('id-ID')}`}</span>
+            </div>
+            <div className="text-sm text-green-600 mt-2 flex items-center">
+              <span className="mr-2">🎉</span>
+              <span>Rate all-in! Tidak ada biaya tambahan</span>
+            </div>
+            <div className="text-xs text-green-700 mt-1">
+              Rate: {activeTab === 'buy' ? '1 USD = ' : '1 USD = '}
+              Rp {rate.toLocaleString('id-ID')}
+            </div>
+          </div>
+
+          <button type="submit" className={`w-full py-3 rounded-lg font-bold transition duration-200 flex items-center justify-center space-x-2 ${!amount || !paypalEmail ? 'bg-gray-400 text-white cursor-not-allowed' : activeTab === 'buy' ? 'bg-blue-500 text-white hover:bg-blue-600' : 'bg-green-500 text-white hover:bg-green-600'}`}>
+            <span>{activeTab === 'buy' ? 'Beli PayPal Sekarang' : 'Jual PayPal Sekarang'}</span>
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
         </div>
       </form>
 
@@ -193,7 +215,7 @@ export default function FormCalculator() {
           </div> */}
 
           {/* Result yang sederhana tanpa breakdown biaya */}
-          <div className={clsx('rounded-lg p-4 border', { 'bg-blue-100 border-blue-500': activeTab === 'buy', 'bg-green-50 border-green-200': activeTab === 'sell' })}>
+          {/* <div className={clsx('rounded-lg p-4 border', { 'bg-blue-100 border-blue-500': activeTab === 'buy', 'bg-green-50 border-green-200': activeTab === 'sell' })}>
             <div className="flex justify-between items-center">
               <span className="text-gray-700 font-medium">{activeTab === 'buy' ? 'Rupiah yang dibayar:' : 'Rupiah yang diterima:'}</span>
               <span className="text-2xl font-bold text-green-600">{activeTab === 'buy' ? `Rp ${total.toLocaleString('id-ID')}` : `Rp ${total.toLocaleString('id-ID')}`}</span>
@@ -206,7 +228,7 @@ export default function FormCalculator() {
               Rate: {activeTab === 'buy' ? '1 USD = ' : '1 USD = '}
               Rp {rate.toLocaleString('id-ID')}
             </div>
-          </div>
+          </div> */}
 
           {/* <Link href={`/order?type=${activeTab}&amount=${amount}&email=${paypalEmail}&method=${paymentMethod}`} className={`w-full py-3 rounded-lg font-bold transition duration-200 flex items-center justify-center space-x-2 ${!amount || !paypalEmail ? 'bg-gray-400 text-white cursor-not-allowed' : activeTab === 'buy' ? 'bg-blue-500 text-white hover:bg-blue-600' : 'bg-green-500 text-white hover:bg-green-600'}`}>
             <span>{activeTab === 'buy' ? 'Beli PayPal Sekarang' : 'Jual PayPal Sekarang'}</span>
