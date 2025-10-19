@@ -7,6 +7,10 @@
 }
 
 @layer base {
+  html {
+    /* data-scroll-behavior: smooth; */
+  }
+
   h1 {
     @apply text-2xl font-medium;
   }
@@ -43,7 +47,6 @@
     width: 1080px;
   }
 }
-
 
 @theme inline {
   --color-background: var(--background);

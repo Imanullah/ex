@@ -7,9 +7,9 @@ interface CalculatorState {
 }
 
 interface CalculatorAction {
-  setCount: (val?: number) => void;
-  setEmail: (val?: string) => void;
-  setPayment: (val?: string) => void;
+  setAmount: (val?: number) => void;
+  setPaypalEmail: (val?: string) => void;
+  setPaymentMethod: (val?: string) => void;
 }
 
 const initialState: CalculatorState = {
@@ -21,9 +21,9 @@ const initialState: CalculatorState = {
 export const useCalculatorStore = create<CalculatorState & CalculatorAction>((set) => ({
   ...initialState,
 
-  setCount: (val) => set(() => ({ amount: val })),
+  setAmount: (val) => set(() => ({ amount: val })),
 
-  setEmail: (val) => set(() => ({ paypalEmail: val })),
+  setPaypalEmail: (val) => set(() => ({ paypalEmail: val })),
 
-  setPayment: (val) => set(() => ({ paymentMethod: val })),
+  setPaymentMethod: (val) => set(() => ({ paymentMethod: val })),
 }));
