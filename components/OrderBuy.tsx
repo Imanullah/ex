@@ -1,10 +1,10 @@
-'use client'
+'use client';
 import React, { useState } from 'react';
 import { useCalculatorStore } from '@/stores/calculatorStore';
 
 export default function OrderBuy() {
   const [step, setStep] = useState(1);
-  // const { paypalEmail, paymentMethod, amount } = useCalculatorStore((state) => state);
+  const { paypalEmail, paymentMethod, amount } = useCalculatorStore((state) => state);
 
   const steps = [
     { number: 1, title: 'Informasi Order', description: 'Isi data order Anda' },
@@ -12,6 +12,8 @@ export default function OrderBuy() {
     { number: 3, title: 'Konfirmasi', description: 'Review dan konfirmasi' },
     { number: 4, title: 'Selesai', description: 'Order berhasil' },
   ];
+
+  console.log(paypalEmail);
 
   return (
     <div className="container">
@@ -35,9 +37,6 @@ export default function OrderBuy() {
           </div>
         </div>
       </section>
-
-       
-
     </div>
   );
 }
