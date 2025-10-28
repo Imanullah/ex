@@ -1,14 +1,20 @@
-'use client';
-import React from 'react';
+import { redirect } from 'next/navigation';
+import OrderBuy from '@/components/OrderBuy';
+import OrderSell from '@/components/OrderSell';
 
-import { useCalculatorStore } from '@/stores/calculatorStore';
+export default async function OrderPage({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
+  const test = await searchParams;
+  console.log(test);
 
-export default function OrderPage() {
- 
+  const { type = '', page = '' } = await searchParams;
 
-  return (
-    <div className="container">
-      <div>Page</div>
-    </div>
-  );
+  console.log(page);
+
+  if (type == 'buy') {
+    return <OrderBuy />;
+  } else if (type == 'sell') {
+    return <OrderSell />;
+  } else {
+    // redirect('/');
+  }
 }
