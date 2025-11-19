@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@import 'scrollbars.scss';
+/* @import './scrollbars.css'; */
 
 :root {
   --background: #ffffff;

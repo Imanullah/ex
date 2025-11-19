@@ -3,33 +3,33 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack -p 1010",
-    "build": "next build --turbopack",
+    "dev": "next dev -p 1010",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
     "@sindresorhus/slugify": "^3.0.0",
+    "babel-plugin-react-compiler": "^1.0.0",
     "clsx": "^2.1.1",
-    "dayjs": "^1.11.18",
+    "dayjs": "^1.11.19",
     "lodash": "^4.17.21",
     "motion": "^12.23.24",
-    "next": "16.0.0",
+    "next": "16.0.3",
     "react": "19.2.0",
     "react-dom": "19.2.0",
-    "react-hook-form": "^7.65.0",
-    "tailwind-merge": "^3.3.1",
+    "react-hook-form": "^7.66.1",
+    "tailwind-merge": "^3.4.0",
     "zustand": "^5.0.8"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^24",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.0.0",
-    "sass": "^1.93.2",
+    "eslint-config-next": "16.0.3",
+    "sass": "^1.94.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

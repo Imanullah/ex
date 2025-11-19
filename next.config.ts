@@ -8,6 +8,8 @@ const nextConfig: NextConfig = {
 
   compress: true,
 
+  reactCompiler: true,
+
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -20,6 +22,7 @@ const nextConfig: NextConfig = {
 
   experimental: {
     viewTransition: true,
+    turbopackFileSystemCacheForDev: true,
   },
 };
 

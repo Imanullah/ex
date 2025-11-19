@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { fira_sans, fira_mono } from '@/assets/fonts/gfonts';
-import '@/assets/styles/globals.scss';
+import '@/assets/styles/globals.css';
 
 export const metadata: Metadata = {
   title: 'Jasa Top Up PayPal Cepat & Aman',

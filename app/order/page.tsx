@@ -3,12 +3,12 @@ import OrderBuy from '@/components/OrderBuy';
 import OrderSell from '@/components/OrderSell';
 
 export default async function OrderPage({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
-  const test = await searchParams;
-  console.log(test);
+  // const test = await searchParams;
+  // console.log(test);
 
   const { type = '', page = '' } = await searchParams;
 
-  console.log(page);
+  console.log(type);
 
   if (type == 'buy') {
     return <OrderBuy />;

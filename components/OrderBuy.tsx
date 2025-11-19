@@ -13,7 +13,13 @@ export default function OrderBuy() {
     { number: 4, title: 'Selesai', description: 'Order berhasil' },
   ];
 
-  console.log(paypalEmail);
+  const clickMe = async () => {
+    const ok = await fetch('/api/whatsapp', { method: 'POST' });
+    
+    const waToken = process.env.NEXT_PUBLIC_WA_TOKEN;
+    console.log(ok.json());
+    // console.log(waToken);
+  };
 
   return (
     <div className="container">
@@ -37,6 +43,8 @@ export default function OrderBuy() {
           </div>
         </div>
       </section>
+
+      <button onClick={clickMe}>Click Me</button>
     </div>
   );
 }
