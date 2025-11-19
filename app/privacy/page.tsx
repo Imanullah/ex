@@ -5,7 +5,7 @@ import Link from 'next/link';
 export default function PrivacyPolicy() {
   return (
     <main className="container mx-auto px-4 py-8">
-      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+      <div className="mx-auto bg-white rounded-lg shadow-md overflow-hidden">
         <div className="bg-blue-600 text-white p-6">
           <h1 className="text-2xl font-bold">Kebijakan Privasi</h1>
           <p className="mt-2">Terakhir diperbarui: {new Date().toLocaleDateString('id-ID')}</p>

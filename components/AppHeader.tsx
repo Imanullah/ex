@@ -5,7 +5,7 @@ export default function AppHeader() {
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <div className="flex items-center space-x-3">
+        <Link href="/" className="flex items-center space-x-3">
           <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
             <span className="text-white font-bold text-lg">$⇄₿</span>
           </div>
@@ -13,7 +13,7 @@ export default function AppHeader() {
             <span className="text-xl font-bold text-gray-800">Avaller.com</span>
             <span className="text-xs text-blue-500 font-medium block">Jual Beli PayPal</span>
           </div>
-        </div>
+        </Link>
 
         <nav className="hidden md:flex space-x-8">
           <Link href="#services" className="text-gray-600 hover:text-blue-500 font-medium transition duration-200">
@@ -30,6 +30,9 @@ export default function AppHeader() {
           </Link>
           <Link href="#faq" className="text-gray-600 hover:text-blue-500 font-medium transition duration-200">
             FAQ
+          </Link>
+          <Link href="/privacy" className="text-gray-600 hover:text-blue-500 font-medium transition duration-200">
+            Privacy
           </Link>
         </nav>
 
