@@ -121,7 +121,6 @@ export default function FormCalculator() {
     Jumlah: ${data.amount} USD
     Email: ${data.paypalEmail}
     Metode Pembayaran: ${data.paymentMethod}
-    Total Biaya: Rp ${total.toLocaleString('id-ID')}
     `;
 
       console.log(text);
