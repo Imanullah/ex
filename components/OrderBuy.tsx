@@ -14,10 +14,38 @@ export default function OrderBuy() {
   ];
 
   const clickMe = async () => {
-    const ok = await fetch('/api/whatsapp', { method: 'POST' });
-    
-    const waToken = process.env.NEXT_PUBLIC_WA_TOKEN;
-    console.log(ok.json());
+    // const res = await fetch('/api/whatsapp', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({ name: 'iman', email: 'oke@oke.com', message: 'pesan' }),
+    // });
+    const accessToken = process.env.NEXT_PUBLIC_WHATSAPP_ACCESS_TOKEN!;
+    const phoneNumberId = process.env.NEXT_PUBLIC_WHATSAPP_PHONE_NUMBER_ID!;
+    const to = process.env.NEXT_PUBLIC_WHATSAPP_TO_NUMBER!;
+
+    const body = 'haiiii';
+
+    console.log(accessToken)
+
+    const res = await fetch(`https://graph.facebook.com/v20.0/${phoneNumberId}/messages`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        messaging_product: 'whatsapp',
+        to,
+        type: 'text',
+        text: { preview_url: false, body },
+      }),
+      // Meta’s API is fine on Edge, but Node runtime is often simpler for local dev
+      cache: 'no-store',
+    });
+    const data = await res.json();
+
+
+    console.log(data);
     // console.log(waToken);
   };
 

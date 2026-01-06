@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
@@ -10,6 +10,7 @@ import { useForm, SubmitHandler, set } from 'react-hook-form';
 import { clsx } from 'clsx';
 
 interface IFormCalculator {
+  name: string;
   amount: number;
   paypalEmail: string;
   paymentMethod: string;
@@ -22,18 +23,21 @@ export default function FormCalculator() {
   // const [paypalEmail, setPaypalEmail] = useState('');
   const [selectPayment, setSelectPayment] = useState('transfer');
 
-  const { register, handleSubmit, watch, formState, setValue, reset } = useForm<IFormCalculator>({ mode: 'onChange', defaultValues: { paymentMethod: 'transfer' } });
+  const { register, handleSubmit, watch, formState, setValue, reset } = useForm<IFormCalculator>({ mode: 'onChange', defaultValues: { paymentMethod: '' } });
   const { errors, isValid } = formState;
 
   const router = useRouter();
+  const selecRef = useRef<HTMLSelectElement>(null);
 
   const watchAmount = watch('amount');
   const watchPaypalEmail = watch('paypalEmail');
 
   const { setAmount, setPaypalEmail, setPaymentMethod } = useCalculatorStore((state) => state);
 
+  const WHATSAPP_TO_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_TO_NUMBER!;
+
   const paymentOptions = [
-    { id: 'transfer', name: 'Transfer Bank', icon: '🏦' },
+    { id: 'transfer_bank', name: 'Transfer Bank', icon: '🏦' },
     { id: 'ewallet', name: 'E-Wallet', icon: '📱' },
     // { id: 'qris', name: 'Qris', icon: '₿' },
     { id: 'crypto', name: 'Crypto', icon: '₿' },
@@ -41,8 +45,8 @@ export default function FormCalculator() {
 
   // Rate sudah include semua biaya - lebih transparan untuk customer
   const rates = {
-    buy: 16500, // 1 USD = Rp 15,600 (user beli PayPal dari kita)
-    sell: 15900, // 1 USD = Rp 14,900 (user jual PayPal ke kita)
+    buy: process.env.NEXT_PUBLIC_RATE_BUY, // 1 USD = Rp 15,600 (user beli PayPal dari kita)
+    sell: process.env.NEXT_PUBLIC_RATE_SELL, // 1 USD = Rp 14,900 (user jual PayPal ke kita)
   };
 
   const amountValidation = {
@@ -59,6 +63,18 @@ export default function FormCalculator() {
       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
       message: 'Format email tidak valid',
     },
+  };
+
+  const nameValidation = {
+    required: 'Nama wajib di isi',
+    pattern: {
+      value: /^[a-z ,.'-]+$/i,
+      message: 'Format nama tidak valid',
+    },
+  };
+
+  const paymentValidation = {
+    require: 'Pilih salah satu pembayaran',
   };
 
   const calculateResult = () => {
@@ -96,17 +112,37 @@ export default function FormCalculator() {
   };
 
   const onSubmitForm: SubmitHandler<IFormCalculator> = (data) => {
-    try {
-      if (isValid) {
-        setAmount(data.amount);
-        setPaypalEmail(data.paypalEmail);
-        setPaymentMethod(data.paymentMethod);
-        reset();
-        router.push(`/order/?type=${activeTab}`);
-      }
-    } catch (error) {}
+    const transactionType = activeTab == 'buy' ? 'BELI' : 'JUAL';
 
+    if (isValid) {
+      const text = `
+    ${transactionType} PAYPAL
+    Nama: ${data.name}
+    Jumlah: ${data.amount} USD
+    Email: ${data.paypalEmail}
+    Metode Pembayaran: ${data.paymentMethod}
+    Total Biaya: Rp ${total.toLocaleString('id-ID')}
+    `;
+
+      console.log(text);
+
+      const url = `https://wa.me/${WHATSAPP_TO_NUMBER}?text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank');
+      reset();
+    }
   };
+
+  // const onSubmitForm: SubmitHandler<IFormCalculator> = (data) => {
+  //   try {
+  //     if (isValid) {
+  //       setAmount(data.amount);
+  //       setPaypalEmail(data.paypalEmail);
+  //       setPaymentMethod(data.paymentMethod);
+  //       reset();
+  //       // router.push(`/order/?type=${activeTab}`);
+  //     }
+  //   } catch (error) {}
+  // };
 
   return (
     <div id="calculator" className="bg-white rounded-2xl shadow-xl p-6 border border-gray-200">
@@ -122,8 +158,19 @@ export default function FormCalculator() {
       <form onSubmit={handleSubmit(onSubmitForm)}>
         <div className="space-y-6">
           <div>
+            <label className="block text-gray-700 mb-2 font-medium">{activeTab === 'buy' ? 'Nama akun Paypal' : 'Nama akun Bank'}</label>
+            <input type="text" {...register('name', nameValidation)} placeholder="Contoh: Elon Musk" className="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+            {errors.name && (
+              <p className="text-red-500 text-sm mt-1 flex items-center">
+                <span className="mr-1">⚠️</span>
+                {errors.name?.message}
+              </p>
+            )}
+          </div>
+
+          <div>
             <label className="block text-gray-700 mb-2 font-medium">{activeTab === 'buy' ? 'Jumlah PayPal (USD)' : 'Jumlah PayPal (USD)'}</label>
-            <input type="number" min={1} {...register('amount', amountValidation)} placeholder={activeTab === 'buy' ? 'Minimal beli $1' : 'Minimal jual $1'} className="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+            <input type="number" min={1} {...register('amount', amountValidation as any)} placeholder={activeTab === 'buy' ? 'Minimal beli $1' : 'Minimal jual $1'} className="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
 
             {errors.amount && (
               <p className="text-red-500 text-sm mt-1 flex items-center">
@@ -145,15 +192,28 @@ export default function FormCalculator() {
 
           <div>
             <label className="block text-gray-700 mb-2 font-medium">Metode Pembayaran</label>
-            <div className="grid grid-cols-3 gap-2">
+            {/* <div className="grid grid-cols-3 gap-2">
               {paymentOptions.map((option) => (
                 <div key={option.id} onClick={() => handlePayment(option.id)} className={`p-3 rounded-lg border-2 text-center transition duration-200 cursor-pointer ${selectPayment === option.id ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-gray-300'}`}>
                   <div className="text-2xl mb-1">{option.icon}</div>
                   <div className="text-sm font-medium">{option.name}</div>
                 </div>
               ))}
-            </div>
-            {/* <input type="text" {...register('paymentMethod')} /> */}
+            </div> */}
+            <select {...register('paymentMethod', { required: true })} className="block w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+              <option value="">Pilih Pembayaran</option>
+              <option value="BCA Syariah">BCA Syariah</option>
+              <option value="Sea Bank">Sea Bank</option>
+              <option value="Bank Jago">Bank Jago</option>
+              <option value="DANA">DANA</option>
+              <option value="GoPay">GoPay</option>
+            </select>
+            {errors.paymentMethod && (
+              <p className="text-red-500 text-sm mt-1 flex items-center">
+                <span className="mr-1">⚠️</span> Pembayaran harus di pilih
+                {/* {errors.paymentMethod.message} */}
+              </p>
+            )}
           </div>
 
           {/* Result yang sederhana tanpa breakdown biaya */}
@@ -168,7 +228,7 @@ export default function FormCalculator() {
             </div>
             <div className="text-xs text-green-700 mt-1">
               Rate: {activeTab === 'buy' ? '1 USD = ' : '1 USD = '}
-              Rp {rate.toLocaleString('id-ID')}
+              Rp {rate!.toLocaleString('id-ID')}
             </div>
           </div>
 
