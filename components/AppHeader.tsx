@@ -37,12 +37,12 @@ export default function AppHeader() {
         </nav>
 
         <div className="flex items-center space-x-4">
-          <Link href="#" className="text-gray-600 hover:text-blue-500 font-medium transition duration-200">
+          {/* <Link href="#" className="text-gray-600 hover:text-blue-500 font-medium transition duration-200">
             Masuk
           </Link>
           <Link href="/order" className="bg-blue-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-600 transition duration-200">
             Mulai Transaksi
-          </Link>
+          </Link> */}
         </div>
       </div>
     </header>
