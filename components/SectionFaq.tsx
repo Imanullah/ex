@@ -33,6 +33,8 @@ const faqs = [
 export default function SectionFaq() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
+  const mobileNumber = process.env.NEXT_PUBLIC_MOBILE_NUMBER;
+
   const toggleFaq = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
@@ -106,7 +108,7 @@ export default function SectionFaq() {
   };
 
   return (
-    <section id="faq" className="py-16 bg-gradient-to-br from-blue-50 to-indigo-100">
+    <section id="faq" className="py-16 bg-linear-to-br from-blue-50 to-indigo-100">
       <div className="container mx-auto px-4">
         <motion.div className="text-center mb-12" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true, margin: '-100px' }}>
           <h2 className="text-3xl font-bold text-gray-800 mb-4">Pertanyaan Umum</h2>
@@ -145,7 +147,7 @@ export default function SectionFaq() {
                       <motion.div className="flex items-center mt-4 space-x-2" initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}>
                         <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                         <span className="text-sm text-blue-600 font-medium">Butuh bantuan lebih lanjut?</span>
-                        <a href="https://wa.me/62812345678" className="text-sm text-green-600 font-semibold hover:underline">
+                        <a href={`https://wa.me/${mobileNumber}`} target='_blank' className="text-sm text-green-600 font-semibold hover:underline">
                           Chat WhatsApp
                         </a>
                       </motion.div>

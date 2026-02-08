@@ -2,13 +2,15 @@ import Link from 'next/link';
 import React from 'react';
 
 export default function AppFooter() {
+  const mobileNumber = process.env.NEXT_PUBLIC_MOBILE_NUMBER;
+
   return (
     <footer className="bg-gray-800 text-white py-12">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center space-x-3 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-linear-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
                 <span className="font-bold text-sm">A</span>
               </div>
               <div>
@@ -79,8 +81,8 @@ export default function AppFooter() {
             <ul className="space-y-2 text-gray-400">
               <li className="flex items-center space-x-2">
                 <span>📱</span>
-                <a href="https://wa.me/6285121312337" className="hover:text-white transition duration-200">
-                  +62 851-2131-2337
+                <a href={`https://wa.me/${mobileNumber}`} target='_blank' className="hover:text-white transition duration-200">
+                  {mobileNumber}
                 </a>
               </li>
               <li className="flex items-center space-x-2">
